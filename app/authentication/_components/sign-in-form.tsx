@@ -1,7 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -36,6 +38,7 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 const SignInForm = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -46,6 +49,7 @@ const SignInForm = () => {
   });
 
   const onSubmit = async (values: FormSchema) => {
+    setLoading(true);
     await authClient.signIn.email({
       email: values.email,
       password: values.password,
@@ -70,6 +74,7 @@ const SignInForm = () => {
         },
       },
     });
+    setLoading(false);
   };
   return (
     <>
@@ -113,7 +118,16 @@ const SignInForm = () => {
               />
             </CardContent>
             <CardFooter>
-              <Button>Entrar</Button>
+              <Button disabled={loading}>
+                {loading ? (
+                  <>
+                    <Loader2Icon className="animate-spin" />
+                    Entrando...
+                  </>
+                ) : (
+                  "Entrar"
+                )}
+              </Button>
             </CardFooter>
           </form>
         </Form>
