@@ -17,8 +17,8 @@ interface CartItemProps {
 const CartItem = ({
   id,
   productName,
-  productVariantImageUrl,
   productVariantName,
+  productVariantImageUrl,
   productVariantPriceInCents,
   quantity,
 }: CartItemProps) => {
@@ -37,18 +37,18 @@ const CartItem = ({
           <p className="text-muted-foreground text-xs font-medium">
             {productVariantName}
           </p>
-        </div>
-        <div className="flex w-[100px] items-center justify-between rounded-lg p-1">
-          <Button className="h-4 w-4" variant="ghost">
-            <MinusIcon />
-          </Button>
-          <p className="text-xs font-medium">{quantity}</p>
-          <Button className="h-4 w-4" variant="ghost">
-            <PlusIcon />
-          </Button>
+          <div className="flex w-[100px] items-center justify-between rounded-lg border p-1">
+            <Button className="h-4 w-4" variant="ghost" onClick={() => {}}>
+              <MinusIcon />
+            </Button>
+            <p className="text-xs font-medium">{quantity}</p>
+            <Button className="h-4 w-4" variant="ghost" onClick={() => {}}>
+              <PlusIcon />
+            </Button>
+          </div>
         </div>
       </div>
-      <div className="flex flex-col items-end justify-center gap-1">
+      <div className="flex flex-col items-end justify-center gap-2">
         <Button variant="outline" size="icon">
           <TrashIcon />
         </Button>
