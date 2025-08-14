@@ -41,6 +41,7 @@ const Cart = () => {
                     key={item.id}
                     id={item.id}
                     productName={item.productVariant.product.name}
+                    productVariantId={item.productVariantId}
                     productVariantName={item.productVariant.name}
                     productVariantImageUrl={item.productVariant.imageUrl}
                     productVariantPriceInCents={
@@ -58,7 +59,7 @@ const Cart = () => {
               <Separator />
               <div className="flex items-center justify-between text-xs font-medium">
                 <p>Subtotal</p>
-                <p>{formatCentsToMoney(cart?.totalPriceInCents ?? 0)}</p>
+                <p>{formatCentsToMoney(cart.totalPriceInCents)}</p>
               </div>
 
               <Separator />
@@ -72,7 +73,7 @@ const Cart = () => {
 
               <div className="flex items-center justify-between text-xs font-medium">
                 <p>Total</p>
-                <p>{formatCentsToMoney(cart?.totalPriceInCents ?? 0)}</p>
+                <p>{formatCentsToMoney(cart.totalPriceInCents)}</p>
               </div>
 
               <Button className="mt-5 rounded-full">Finalizar compra</Button>
