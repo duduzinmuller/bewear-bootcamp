@@ -1,20 +1,18 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 
-import { addProductToCart } from "../actions/add-cart-product";
-import { decreaseCartProductQuantity } from "../actions/decrease-cart-product-quantity";
-import { removeProductFromCart } from "../actions/remove-cart-product";
 import { formatCentsToMoney } from "../helpers/money";
+import { useDecreaseCartProduct } from "../hooks/mutations/use-decrease-cart-product";
+import { useRemoveProductFromCart } from "../hooks/mutations/use-delete-product-from-cart";
+import { useIncreaseCartProduct } from "../hooks/mutations/use-increase-cart-product";
 
 interface CartItemProps {
   id: string;
   productName: string;
   productVariantName: string;
-  productVariantId: string;
   productVariantImageUrl: string;
   productVariantPriceInCents: number;
   quantity: number;
@@ -24,33 +22,13 @@ const CartItem = ({
   id,
   productName,
   productVariantName,
-  productVariantId,
   productVariantImageUrl,
   productVariantPriceInCents,
   quantity,
 }: CartItemProps) => {
-  const queryClient = useQueryClient();
-  const removeProductFromCartMutation = useMutation({
-    mutationKey: ["remove-cart-product"],
-    mutationFn: () => removeProductFromCart({ cartItemId: id }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-  });
-  const decreaseCartProductQuantityMutation = useMutation({
-    mutationKey: ["decrease-cart-product"],
-    mutationFn: () => decreaseCartProductQuantity({ cartItemId: id }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-  });
-  const increaseCartProductQuantityMutation = useMutation({
-    mutationKey: ["increase-cart-product"],
-    mutationFn: () => addProductToCart({ productVariantId, quantity: 1 }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-  });
+  const removeProductFromCartMutation = useRemoveProductFromCart(id);
+  const decreaseCartProductQuantityMutation = useDecreaseCartProduct(id);
+  const increaseCartProductQuantityMutation = useIncreaseCartProduct(id);
   const handleDeleteToProduct = () => {
     removeProductFromCartMutation.mutate(undefined, {
       onSuccess: () => {

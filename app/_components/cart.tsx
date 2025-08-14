@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { ShoppingBasketIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -12,15 +11,12 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { getCart } from "../actions/get-cart";
 import { formatCentsToMoney } from "../helpers/money";
+import { useCart } from "../hooks/queries/get-cart";
 import CartItem from "./cart-item";
 
 const Cart = () => {
-  const { data: cart } = useQuery({
-    queryKey: ["cart"],
-    queryFn: () => getCart(),
-  });
+  const { data: cart } = useCart();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -41,7 +37,6 @@ const Cart = () => {
                     key={item.id}
                     id={item.id}
                     productName={item.productVariant.product.name}
-                    productVariantId={item.productVariantId}
                     productVariantName={item.productVariant.name}
                     productVariantImageUrl={item.productVariant.imageUrl}
                     productVariantPriceInCents={
