@@ -5,6 +5,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 
+import { decreaseCartProductQuantity } from "../actions/decrease-cart-product-quantity";
 import { removeProductFromCart } from "../actions/remove-cart-product";
 import { formatCentsToMoney } from "../helpers/money";
 
@@ -33,7 +34,13 @@ const CartItem = ({
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
   });
-
+  const decreaseCartProductQuantityMutation = useMutation({
+    mutationKey: ["decrease-cart-product"],
+    mutationFn: () => decreaseCartProductQuantity({ cartItemId: id }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    },
+  });
   const handleDeleteToProduct = () => {
     removeProductFromCartMutation.mutate(undefined, {
       onSuccess: () => {
@@ -43,6 +50,10 @@ const CartItem = ({
         toast.error("Erro ao excluir o produto.");
       },
     });
+  };
+
+  const handleDecreaseCartProductQuantity = () => {
+    decreaseCartProductQuantityMutation.mutate();
   };
   return (
     <div className="flex items-center justify-between">
@@ -60,7 +71,11 @@ const CartItem = ({
             {productVariantName}
           </p>
           <div className="flex w-[100px] items-center justify-between rounded-lg border p-1">
-            <Button className="h-4 w-4" variant="ghost" onClick={() => {}}>
+            <Button
+              className="h-4 w-4"
+              variant="ghost"
+              onClick={handleDecreaseCartProductQuantity}
+            >
               <MinusIcon />
             </Button>
             <p className="text-xs font-medium">{quantity}</p>
