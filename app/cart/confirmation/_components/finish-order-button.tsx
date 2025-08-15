@@ -1,10 +1,12 @@
 "use client";
 
+import { loadStripe } from "@stripe/stripe-js";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+import { createCheckoutSession } from "@/app/actions/create-checkout-session";
 import { useFinishOrder } from "@/app/hooks/mutations/use-finish-order";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,8 +20,20 @@ import {
 const FinishOrderButton = () => {
   const [successDialogIsOpen, setSuccessDialogIsOpen] = useState(false);
   const finishOrderMutation = useFinishOrder();
-  const handleFinishOrder = () => {
-    finishOrderMutation.mutate();
+  const handleFinishOrder = async () => {
+    const { orderId } = await finishOrderMutation.mutateAsync();
+    const checkoutSession = await createCheckoutSession({
+      orderId,
+    });
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+    );
+    if (!stripe) {
+      throw new Error("Failed to load");
+    }
+    await stripe.redirectToCheckout({
+      sessionId: checkoutSession.id,
+    });
     setSuccessDialogIsOpen(true);
   };
   return (
