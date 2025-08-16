@@ -11,8 +11,18 @@ const Brands = () => {
           <PartnerBrands brandIcon="/Puma.svg" name="Puma" />
           <PartnerBrands brandIcon="/New Balance.svg" name="New Balance" />
           <PartnerBrands brandIcon="/converse.png" name="Converse" />
-          <PartnerBrands brandIcon="/polo.png" name="Polo" />
-          <PartnerBrands brandIcon="/zara.png" name="Zara" />
+          <PartnerBrands
+            brandIcon="/polo.png"
+            width={20}
+            height={20}
+            name="Polo"
+          />
+          <PartnerBrands
+            brandIcon="/zara.png"
+            width={30}
+            height={30}
+            name="Zara"
+          />
         </div>
       </div>
     </div>
