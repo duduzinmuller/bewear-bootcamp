@@ -59,10 +59,44 @@ const Home = async () => {
           width={0}
           height={0}
           sizes="100vw"
-          className="h-auto w-full"
+          className="h-auto w-full md:hidden"
         />
 
-        <ProductList products={newlyCreatedProducts} title="Novos produtos" />
+        <div className="hidden md:block">
+          <div className="mx-6 flex p-5 px-5">
+            <div className="flex w-full flex-col gap-4">
+              <Image
+                src="/NikeTherma.png"
+                alt="Nike Therma"
+                width={0}
+                height={0}
+                sizes="20vw"
+                className="h-[307px] w-[513px] rounded-lg object-cover"
+              />
+              <Image
+                src="/NikeThermaFit.png"
+                alt="Nike Therma Fit"
+                width={0}
+                height={0}
+                sizes="20vw"
+                className="h-[307px] w-[513px] rounded-lg object-cover"
+              />
+            </div>
+            <Image
+              src="/Coat.png"
+              alt="Coat"
+              width={0}
+              height={0}
+              sizes="50vw"
+              className="h-[638px] w-[815px] rounded-lg"
+            />
+          </div>
+        </div>
+
+        <div className="md:hidden">
+          <ProductList products={newlyCreatedProducts} title="Novos produtos" />
+        </div>
+
         <Footer />
       </div>
     </>
