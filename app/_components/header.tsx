@@ -17,7 +17,7 @@ import { authClient } from "@/lib/auth-client";
 
 import Cart from "./cart";
 
-export const Header = () => {
+const Header = () => {
   const { data: session } = authClient.useSession();
   return (
     <header className="flex items-center justify-between p-5 md:relative md:justify-center">
@@ -85,3 +85,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
 
-import { Header } from "../_components/header";
+import Header from "../_components/header";
 import { db } from "../_db";
 import { orderTable } from "../_db/schema";
 import Orders from "./_components/orders";

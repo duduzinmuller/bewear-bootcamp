@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import Footer from "@/app/_components/footer";
-import { Header } from "@/app/_components/header";
+import Header from "@/app/_components/header";
 import { db } from "@/app/_db";
 import { shippingAddressTable } from "@/app/_db/schema";
 import { auth } from "@/lib/auth";

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import Footer from "@/app/_components/footer";
-import { Header } from "@/app/_components/header";
+import Header from "@/app/_components/header";
 import ProductList from "@/app/_components/product-list";
 import { db } from "@/app/_db";
 import { productTable, productVariantTable } from "@/app/_db/schema";

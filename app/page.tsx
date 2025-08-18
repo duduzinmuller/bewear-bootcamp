@@ -5,7 +5,7 @@ import Brands from "./_components/brands";
 import CategoryDesktop from "./_components/category-desktop";
 import CategorySelector from "./_components/category-selector";
 import Footer from "./_components/footer";
-import { Header } from "./_components/header";
+import Header from "./_components/header";
 import ProductList from "./_components/product-list";
 import { db } from "./_db";
 import { productTable } from "./_db/schema";

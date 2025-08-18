@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import Footer from "@/app/_components/footer";
-import { Header } from "@/app/_components/header";
+import Header from "@/app/_components/header";
 import { db } from "@/app/_db";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/lib/auth";

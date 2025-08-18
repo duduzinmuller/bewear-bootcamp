@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 
-import { Header } from "@/app/_components/header";
+import Header from "@/app/_components/header";
 import ProductItem from "@/app/_components/product-item";
 import { db } from "@/app/_db";
 import { categoryTable, productTable } from "@/app/_db/schema";

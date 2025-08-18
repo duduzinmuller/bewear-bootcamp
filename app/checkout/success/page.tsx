@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Header } from "@/app/_components/header";
+import Header from "@/app/_components/header";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
