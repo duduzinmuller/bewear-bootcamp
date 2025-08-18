@@ -42,7 +42,9 @@ const ProductVariantPage = async ({ params }: ProductVariantPageProps) => {
   return (
     <>
       <Header />
-      <div className="flex flex-col space-y-6">
+
+      {/* Layout Mobile - exatamente como está */}
+      <div className="flex flex-col space-y-6 lg:hidden">
         <Image
           src={productVariant.imageUrl}
           alt={productVariant.name}
@@ -80,6 +82,62 @@ const ProductVariantPage = async ({ params }: ProductVariantPageProps) => {
         <ProductList products={likelyProducts} title="Talvez você goste" />
 
         <Footer />
+      </div>
+
+      <div className="hidden lg:block">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <div className="space-y-4">
+              <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
+                <Image
+                  src={productVariant.imageUrl}
+                  alt={productVariant.name}
+                  sizes="50vw"
+                  height={600}
+                  width={600}
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">
+                  {productVariant.product.name}
+                </h1>
+                <h2 className="text-muted-foreground mt-1 text-lg">
+                  {productVariant.name}
+                </h2>
+                <p className="mt-4 text-3xl font-bold text-gray-900">
+                  {formatCentsToMoney(productVariant.priceInCents)}
+                </p>
+                <div className="mt-4">
+                  <VariantSelector
+                    selectedVariant={productVariant.slug}
+                    variants={productVariant.product.variants}
+                  />
+                </div>
+              </div>
+
+              <ProductAction productVariantId={productVariant.id} />
+
+              <div className="border-t pt-6">
+                <h3 className="mb-3 text-sm font-medium text-gray-900">
+                  Descrição do Produto
+                </h3>
+                <p className="text-sm leading-relaxed text-gray-600">
+                  {productVariant.product.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-16">
+            <ProductList products={likelyProducts} title="Talvez você goste" />
+          </div>
+
+          <Footer />
+        </div>
       </div>
     </>
   );
