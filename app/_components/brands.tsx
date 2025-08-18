@@ -18,7 +18,7 @@ const Brands = () => {
           />
           <PartnerBrands
             brandIcon="/polo.png"
-            width={30}
+            width={38}
             height={30}
             name="Polo"
           />

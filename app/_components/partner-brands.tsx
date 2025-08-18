@@ -16,7 +16,13 @@ const PartnerBrands = ({
   return (
     <div className="mx-8 flex shrink-0 flex-col items-center gap-6 p-5 px-10">
       <div className="flex h-8 w-8 items-center justify-center">
-        <Image src={brandIcon} alt={name} width={width} height={height} />
+        <Image
+          src={brandIcon}
+          alt={name}
+          width={width}
+          height={height}
+          className="max-h-8 max-w-8 object-contain"
+        />
       </div>
       <p className="text-sm font-medium whitespace-nowrap">{name}</p>
     </div>
