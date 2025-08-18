@@ -10,17 +10,22 @@ const Brands = () => {
           <PartnerBrands brandIcon="/Adidas.svg" name="Adidas" />
           <PartnerBrands brandIcon="/Puma.svg" name="Puma" />
           <PartnerBrands brandIcon="/New Balance.svg" name="New Balance" />
-          <PartnerBrands brandIcon="/converse.png" name="Converse" />
+          <PartnerBrands
+            brandIcon="/converse.png"
+            name="Converse"
+            width={51}
+            height={44}
+          />
           <PartnerBrands
             brandIcon="/polo.png"
-            width={20}
-            height={20}
+            width={30}
+            height={30}
             name="Polo"
           />
           <PartnerBrands
             brandIcon="/zara.png"
-            width={30}
-            height={30}
+            width={61}
+            height={26}
             name="Zara"
           />
         </div>

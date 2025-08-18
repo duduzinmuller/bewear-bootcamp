@@ -30,20 +30,19 @@ const Home = async () => {
         <div className="mx-12 hidden px-8 md:block">
           <CategoryDesktop categories={categories} />
         </div>
+
         <Image
           src="/frame.png"
           alt="Frame"
-          width={0}
-          height={0}
-          sizes="100vw"
+          width={1200}
+          height={600}
           className="h-auto w-full md:hidden"
         />
         <Image
           src="/banner-desktop.png"
           alt="Frame Desktop"
-          width={0}
-          height={0}
-          sizes="100vh"
+          width={1200}
+          height={400}
           className="hidden h-auto w-full md:block"
         />
         <Brands />
@@ -68,26 +67,23 @@ const Home = async () => {
               <Image
                 src="/NikeTherma.png"
                 alt="Nike Therma"
-                width={0}
-                height={0}
-                sizes="20vw"
+                width={513}
+                height={307}
                 className="h-[307px] w-[513px] rounded-lg object-cover"
               />
               <Image
                 src="/NikeThermaFit.png"
                 alt="Nike Therma Fit"
-                width={0}
-                height={0}
-                sizes="20vw"
+                width={513}
+                height={307}
                 className="h-[307px] w-[513px] rounded-lg object-cover"
               />
             </div>
             <Image
               src="/Coat.png"
               alt="Coat"
-              width={0}
-              height={0}
-              sizes="50vw"
+              width={815}
+              height={638}
               className="h-[638px] w-[815px] rounded-lg"
             />
           </div>

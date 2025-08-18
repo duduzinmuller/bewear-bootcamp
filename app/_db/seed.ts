@@ -1,7 +1,12 @@
 import crypto from "crypto";
 
 import { db } from ".";
-import { categoryTable, productTable, productVariantTable } from "./schema";
+import {
+  categoryTable,
+  orderItemTable,
+  productTable,
+  productVariantTable,
+} from "./schema";
 
 const productImages = {
   Mochila: {
@@ -311,9 +316,9 @@ const products = [
     description: "Boné com aba curva, estilo clássico e versátil.",
     categoryName: "Acessórios",
     variants: [
-      { color: "Azul", price: 79 },
-      { color: "Bege", price: 79 },
-      { color: "Verde", price: 79 },
+      { color: "Azul", price: 7999 },
+      { color: "Bege", price: 7999 },
+      { color: "Verde", price: 7999 },
     ],
   },
 
@@ -324,9 +329,9 @@ const products = [
       "Shorts esportivo para atividades físicas, com tecido que absorve o suor.",
     categoryName: "Bermuda & Shorts",
     variants: [
-      { color: "Preto", price: 69 },
-      { color: "Azul", price: 69 },
-      { color: "Verde", price: 69 },
+      { color: "Preto", price: 6999 },
+      { color: "Azul", price: 6999 },
+      { color: "Verde", price: 6999 },
     ],
   },
   {
@@ -334,9 +339,9 @@ const products = [
     description: "Shorts casual confortável, perfeito para o dia a dia.",
     categoryName: "Bermuda & Shorts",
     variants: [
-      { color: "Verde", price: 59 },
-      { color: "Preto", price: 59 },
-      { color: "Azul", price: 59 },
+      { color: "Verde", price: 5999 },
+      { color: "Preto", price: 5999 },
+      { color: "Azul", price: 5999 },
     ],
   },
   {
@@ -345,9 +350,9 @@ const products = [
       "Shorts com design moderno e confortável, ideal para diversas ocasiões.",
     categoryName: "Bermuda & Shorts",
     variants: [
-      { color: "Marrom", price: 74 },
-      { color: "Preto", price: 74 },
-      { color: "Bege", price: 74 },
+      { color: "Marrom", price: 7499 },
+      { color: "Preto", price: 7499 },
+      { color: "Bege", price: 7499 },
     ],
   },
   {
@@ -356,9 +361,9 @@ const products = [
       "Bermuda premium com qualidade superior e design diferenciado.",
     categoryName: "Bermuda & Shorts",
     variants: [
-      { color: "Verde", price: 89 },
-      { color: "Preta", price: 89 },
-      { color: "Azul", price: 89 },
+      { color: "Verde", price: 8999 },
+      { color: "Preta", price: 8999 },
+      { color: "Azul", price: 8999 },
     ],
   },
 
@@ -369,9 +374,9 @@ const products = [
       "Calça esportiva Nike Club, confortável e versátil para treinos e uso casual.",
     categoryName: "Calças",
     variants: [
-      { color: "Bege", price: 159 },
-      { color: "Preta", price: 159 },
-      { color: "Vinho", price: 159 },
+      { color: "Bege", price: 15999 },
+      { color: "Preta", price: 15999 },
+      { color: "Vinho", price: 15999 },
     ],
   },
   {
@@ -380,9 +385,9 @@ const products = [
       "Calça de malha com tecido macio e confortável, ideal para relaxar.",
     categoryName: "Calças",
     variants: [
-      { color: "Preta", price: 129 },
-      { color: "Branca", price: 129 },
-      { color: "Azul", price: 129 },
+      { color: "Preta", price: 12999 },
+      { color: "Branca", price: 12999 },
+      { color: "Azul", price: 12999 },
     ],
   },
   {
@@ -391,9 +396,9 @@ const products = [
       "Calça com design urbano e moderno, perfeita para o street style.",
     categoryName: "Calças",
     variants: [
-      { color: "Bege", price: 139 },
-      { color: "Branca", price: 139 },
-      { color: "Preta", price: 139 },
+      { color: "Bege", price: 13999 },
+      { color: "Branca", price: 13999 },
+      { color: "Preta", price: 13999 },
     ],
   },
   {
@@ -402,9 +407,9 @@ const products = [
       "Calça Jordan com qualidade premium e design icônico da marca.",
     categoryName: "Calças",
     variants: [
-      { color: "Verde", price: 189 },
-      { color: "Preta", price: 189 },
-      { color: "Azul", price: 189 },
+      { color: "Verde", price: 18999 },
+      { color: "Preta", price: 18999 },
+      { color: "Azul", price: 18999 },
     ],
   },
 
@@ -415,9 +420,9 @@ const products = [
       "Camiseta ACG com design técnico e material de alta qualidade.",
     categoryName: "Camisetas",
     variants: [
-      { color: "Bege", price: 69 },
-      { color: "Preta", price: 69 },
-      { color: "Branca", price: 69 },
+      { color: "Bege", price: 6999 },
+      { color: "Preta", price: 6999 },
+      { color: "Branca", price: 6999 },
     ],
   },
   {
@@ -426,8 +431,8 @@ const products = [
       "Camiseta para corrida com tecido respirável e conforto superior.",
     categoryName: "Camisetas",
     variants: [
-      { color: "Preta", price: 59 },
-      { color: "Azul", price: 59 },
+      { color: "Preta", price: 5999 },
+      { color: "Azul", price: 5999 },
     ],
   },
   {
@@ -436,8 +441,8 @@ const products = [
       "Camiseta esportiva para atividades físicas com tecnologia Dri-FIT.",
     categoryName: "Camisetas",
     variants: [
-      { color: "Branca", price: 54 },
-      { color: "Preta", price: 54 },
+      { color: "Branca", price: 5499 },
+      { color: "Preta", price: 5499 },
     ],
   },
   {
@@ -446,8 +451,8 @@ const products = [
       "Camiseta com estampa inspirada na natureza, confortável e estilosa.",
     categoryName: "Camisetas",
     variants: [
-      { color: "Preta", price: 64 },
-      { color: "Azul", price: 64 },
+      { color: "Preta", price: 6499 },
+      { color: "Azul", price: 6499 },
     ],
   },
 
@@ -458,8 +463,8 @@ const products = [
       "Jaqueta corta-vento leve e resistente, ideal para atividades ao ar livre.",
     categoryName: "Jaquetas & Moletons",
     variants: [
-      { color: "Preto", price: 199 },
-      { color: "Branco", price: 199 },
+      { color: "Preto", price: 19999 },
+      { color: "Branco", price: 19999 },
     ],
   },
   {
@@ -468,8 +473,8 @@ const products = [
       "Jaqueta Windrunner com design clássico e proteção contra o vento.",
     categoryName: "Jaquetas & Moletons",
     variants: [
-      { color: "Azul", price: 229 },
-      { color: "Bege", price: 229 },
+      { color: "Azul", price: 22999 },
+      { color: "Bege", price: 22999 },
     ],
   },
   {
@@ -478,8 +483,8 @@ const products = [
       "Jaqueta com estilo urbano e moderno, perfeita para compor looks casuais.",
     categoryName: "Jaquetas & Moletons",
     variants: [
-      { color: "Marrom", price: 179 },
-      { color: "Cinza", price: 179 },
+      { color: "Marrom", price: 17999 },
+      { color: "Cinza", price: 17999 },
     ],
   },
   {
@@ -487,8 +492,8 @@ const products = [
     description: "Jaqueta Nike Club com qualidade premium e design atemporal.",
     categoryName: "Jaquetas & Moletons",
     variants: [
-      { color: "Azul", price: 259 },
-      { color: "Amarela", price: 259 },
+      { color: "Azul", price: 25999 },
+      { color: "Amarela", price: 25999 },
     ],
   },
 
@@ -499,9 +504,9 @@ const products = [
       "Tênis Nike Vomero com tecnologia de amortecimento superior para corridas.",
     categoryName: "Tênis",
     variants: [
-      { color: "Preto", price: 799 },
-      { color: "Branco", price: 799 },
-      { color: "Azul", price: 799 },
+      { color: "Preto", price: 79999 },
+      { color: "Branco", price: 79999 },
+      { color: "Azul", price: 79999 },
     ],
   },
   {
@@ -509,9 +514,9 @@ const products = [
     description: "Tênis Nike com design Panda icônico, confortável e estiloso.",
     categoryName: "Tênis",
     variants: [
-      { color: "Verde", price: 699 },
-      { color: "Azul", price: 699 },
-      { color: "Preto", price: 699 },
+      { color: "Verde", price: 69999 },
+      { color: "Azul", price: 69999 },
+      { color: "Preto", price: 69999 },
     ],
   },
   {
@@ -520,8 +525,8 @@ const products = [
       "Tênis Nike Air Force 1, um clássico atemporal com design icônico.",
     categoryName: "Tênis",
     variants: [
-      { color: "Preto", price: 899 },
-      { color: "Branco", price: 899 },
+      { color: "Preto", price: 89999 },
+      { color: "Branco", price: 89999 },
     ],
   },
   {
@@ -529,9 +534,9 @@ const products = [
     description: "Tênis Nike Dunk Low com design retrô e conforto moderno.",
     categoryName: "Tênis",
     variants: [
-      { color: "Branco", price: 759 },
-      { color: "Preto", price: 759 },
-      { color: "Azul", price: 759 },
+      { color: "Branco", price: 75999 },
+      { color: "Preto", price: 75999 },
+      { color: "Azul", price: 75999 },
     ],
   },
 ];
@@ -540,8 +545,9 @@ async function main() {
   console.log("🌱 Iniciando o seeding do banco de dados...");
 
   try {
-    // Limpar dados existentes
+    // Limpar dados existentes (respeitando foreign keys)
     console.log("🧹 Limpando dados existentes...");
+    await db.delete(orderItemTable);
     await db.delete(productVariantTable);
     await db.delete(productTable);
     await db.delete(categoryTable);
