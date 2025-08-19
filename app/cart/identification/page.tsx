@@ -44,30 +44,60 @@ const IdentificationPage = async () => {
     0,
   );
   return (
-    <div>
-      <Header />
-      <div className="space-y-4 px-5">
-        <Addresses
-          shippingAddresses={shippingAddresses}
-          defaultShippingAddressId={cart.shippingAddress?.id || null}
-        />
-        <CartSummary
-          subtotalInCents={cartTotalInCents}
-          totalInCents={cartTotalInCents}
-          products={cart.items.map((item) => ({
-            id: item.productVariant.id,
-            name: item.productVariant.product.name,
-            variantName: item.productVariant.name,
-            quantity: item.quantity,
-            priceInCents: item.productVariant.priceInCents,
-            imageUrl: item.productVariant.imageUrl,
-          }))}
-        />
+    <>
+      <div className="flex min-h-screen flex-col lg:hidden">
+        <Header />
+        <div className="flex-1 space-y-4 px-5">
+          <Addresses
+            shippingAddresses={shippingAddresses}
+            defaultShippingAddressId={cart.shippingAddress?.id || null}
+          />
+          <CartSummary
+            subtotalInCents={cartTotalInCents}
+            totalInCents={cartTotalInCents}
+            products={cart.items.map((item) => ({
+              id: item.productVariant.id,
+              name: item.productVariant.product.name,
+              variantName: item.productVariant.name,
+              quantity: item.quantity,
+              priceInCents: item.productVariant.priceInCents,
+              imageUrl: item.productVariant.imageUrl,
+            }))}
+          />
+        </div>
+        <div className="mt-12">
+          <Footer />
+        </div>
       </div>
-      <div className="mt-12">
+
+      <div className="hidden min-h-screen flex-col lg:flex">
+        <Header />
+        <div className="flex flex-1 flex-col gap-4 p-8 px-5 lg:flex-row lg:items-start">
+          <div className="flex-1">
+            <Addresses
+              shippingAddresses={shippingAddresses}
+              defaultShippingAddressId={cart.shippingAddress?.id || null}
+            />
+          </div>
+
+          <div className="w-full shrink-0 lg:w-96">
+            <CartSummary
+              subtotalInCents={cartTotalInCents}
+              totalInCents={cartTotalInCents}
+              products={cart.items.map((item) => ({
+                id: item.productVariant.id,
+                name: item.productVariant.product.name,
+                variantName: item.productVariant.name,
+                quantity: item.quantity,
+                priceInCents: item.productVariant.priceInCents,
+                imageUrl: item.productVariant.imageUrl,
+              }))}
+            />
+          </div>
+        </div>
         <Footer />
       </div>
-    </div>
+    </>
   );
 };
 
