@@ -92,9 +92,8 @@ const Home = async () => {
         <div className="md:hidden">
           <ProductList products={newlyCreatedProducts} title="Novos produtos" />
         </div>
-
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 };
